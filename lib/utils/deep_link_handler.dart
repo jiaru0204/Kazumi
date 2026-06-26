@@ -12,8 +12,10 @@ class DeepLinkHandler {
       print('Deep link初始化失败: $e');
     }
 
-    getLinksStream().listen((String link) {
-      _handleDeepLink(link);
+    linkStream.listen((String? link) {
+      if (link != null) {
+        _handleDeepLink(link);
+      }
     }, onError: (err) {
       print('Deep link监听错误: $err');
     });
