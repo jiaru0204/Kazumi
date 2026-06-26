@@ -37,15 +37,14 @@ class _SearchPageState extends State<SearchPage> {
     scrollController.addListener(scrollListener);
     searchController.addListener(_syncFilterFromSearchText);
     searchPageController.loadSearchHistories();
-    if (widget.inputTag != '') {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final tagString = 'tag:${Uri.decodeComponent(widget.inputTag)}';
-        _applyFilterState(SearchParser(tagString).toFilterState(),
-            search: true);
-      });
-    }
-  }
-
+  if (widget.inputTag != '') {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    final keyword = Uri.decodeComponent(widget.inputTag);
+    _setSearchText(keyword);
+    searchPageController.searchBangumi(keyword, type: 'init');
+  });  
+}       
+}      
   @override
   void dispose() {
     searchPageController.bangumiList.clear();
