@@ -1,10 +1,12 @@
-import 'package:uni_links/uni_links.dart';
+import 'package:app_links/app_links.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class DeepLinkHandler {
   static Future<void> init() async {
+    final appLinks = AppLinks();
+
     try {
-      final initialLink = await getInitialLink();
+      final initialLink = await appLinks.getInitialLink();
       if (initialLink != null) {
         _handleDeepLink(initialLink);
       }
@@ -12,10 +14,8 @@ class DeepLinkHandler {
       print('Deep link初始化失败: $e');
     }
 
-    linkStream.listen((String? link) {
-      if (link != null) {
-        _handleDeepLink(link);
-      }
+    appLinks.linkStream.listen((String link) {
+      _handleDeepLink(link);
     }, onError: (err) {
       print('Deep link监听错误: $err');
     });
