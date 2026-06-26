@@ -6,16 +6,18 @@ class DeepLinkHandler {
     final appLinks = AppLinks();
 
     try {
+      // getInitialLink() 返回 Uri?，不是 String
       final initialLink = await appLinks.getInitialLink();
       if (initialLink != null) {
-        _handleDeepLink(initialLink);
+        _handleDeepLink(initialLink.toString());
       }
     } catch (e) {
       print('Deep link初始化失败: $e');
     }
 
-    appLinks.linkStream.listen((String link) {
-      _handleDeepLink(link);
+    // 用 uriLinkStream 监听 Uri
+    appLinks.uriLinkStream.listen((Uri uri) {
+      _handleDeepLink(uri.toString());
     }, onError: (err) {
       print('Deep link监听错误: $err');
     });
