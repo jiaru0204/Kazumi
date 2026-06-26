@@ -34,7 +34,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  uni_links: ^0.5.1  # 👈 添加这一行
+  uni_links: ^0.6.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
