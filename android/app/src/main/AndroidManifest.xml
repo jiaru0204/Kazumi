@@ -27,9 +27,24 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+            <!-- Launcher intent-filter -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- Deep link intent-filter for Bangumi jump -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- 支持搜索跳转 -->
+                <data android:scheme="kazumi" android:host="search" />
+                <!-- 支持详情页跳转 -->
+                <data android:scheme="kazumi" android:host="anime" />
+                <!-- 支持主页跳转 -->
+                <data android:scheme="kazumi" android:host="home" />
+                <!-- 通用scheme，无host限制 -->
+                <data android:scheme="kazumi" />
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
